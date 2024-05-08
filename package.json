@@ -1,0 +1,19 @@
+{
+  "name": "project-2",
+  "version": "1.0.0",
+  "description": "connecting contractors to customers",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Carlospetsdogs/Project-2.git"
+  },
+  "author": "Carlos Ruiz, Jeremy Tennent, Zavier Jackson",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/Carlospetsdogs/Project-2/issues"
+  },
+  "homepage": "https://github.com/Carlospetsdogs/Project-2#readme"
+}
