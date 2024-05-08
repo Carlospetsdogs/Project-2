@@ -24,3 +24,4 @@ CREATE DATABASE login_db;
 --     userId INT,
 --     userRoleId INT
 -- );
+
