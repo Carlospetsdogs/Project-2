@@ -1,19 +1,24 @@
 CREATE DATABASE login_db;
 USE login_db;
 CREATE TABLE user (
-    userId INT AUTO_INCREMENT PRIMARY KEY,
-    userRoleId INT,
-    UserFName VARCHAR(50),
-    UserLName VARCHAR(50),
-    email VARCHAR(50),
+    `userId` INT(10) DEFAULT 0 AUTO_INCREMENT ,
+    `userRoleId` INT(1) NOT NULL,
+    `UserFName` VARCHAR(50)DEFAULT NULL,
+    `UserLName` VARCHAR(50)DEFAULT NULL,
+    `email` VARCHAR(50)DEFAULT NULL,
+    `zip` RIGHT(1000000)CHECK_NUM,6 DEFAULT 0,
+    `city` VARCHAR(50)DEFAULT NULL,
+    `state` VARCHAR(50)DEFAULT NULL,
+
 );
 CREATE TABLE userLogin (
-    userId INT AUTO_INCREMENT PRIMARY KEY,
-    loginName VARCHAR(50),
-    loginPassword VARCHAR(50)
+    `userId` INT AUTO_INCREMENT DEFAULT 0,
+    `loginName` VARCHAR(50) DEFAULT NULL,
+    `loginPassword` VARCHAR(50) DEFAULT NULL,
     
 );
 CREATE TABLE userRole (
-    userRoleId INT AUTO_INCREMENT PRIMARY KEY,
-    roleName VARCHAR(50)
+    `userRoleId` INT(1) AUTO_INCREMENT DEFAULT 0,
+    `roleName` VARCHAR(5) DEFAULT USER,
 );
+
