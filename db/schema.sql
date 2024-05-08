@@ -5,4 +5,15 @@ CREATE TABLE user (
     userRoleId INT,
     UserFName VARCHAR(50),
     UserLName VARCHAR(50),
+    email VARCHAR(50),
+);
+CREATE TABLE userLogin (
+    userId INT AUTO_INCREMENT PRIMARY KEY,
+    loginName VARCHAR(50),
+    loginPassword VARCHAR(50)
+    
+);
+CREATE TABLE userRole (
+    userRoleId INT AUTO_INCREMENT PRIMARY KEY,
+    roleName VARCHAR(50)
 );
