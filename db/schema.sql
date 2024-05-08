@@ -17,7 +17,3 @@ CREATE TABLE userRole (
     userRoleId INT AUTO_INCREMENT PRIMARY KEY,
     roleName VARCHAR(50)
 );
-CREATE TABLE userLoginRole (
-    userId INT,
-    userRoleId INT
-);
