@@ -25,7 +25,7 @@
     background-size: cover;
     background-position: center;
     height: 300px; 
-    color: rgb(248, 240, 240);
+    color: #4CAF50;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -35,4 +35,37 @@
 /* Style for the hero banner title */
 .hero-title {
     font-size: 2.5rem; /* Adjust the font size as needed */
+}
+
+.button-container {
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center items horizontally */
+    gap: 10px; /* Add spacing between buttons */
+}
+
+/* CSS styles for buttons */
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Green */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none; /* Remove underline style */
+    display: inline-block; /* Make sure buttons are displayed inline */
+}
+
+/* Styling for button when hovered */
+button:hover {
+    background-color: #011502; /* Darker green */
+}
+
+/* Style for the nested <a> tags */
+button a {
+    color: white;
+    text-decoration: none; /* Remove underline style */
+}
+
+.hero-banner .hero-title {
+    color: #4CAF50;
 }

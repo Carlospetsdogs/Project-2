@@ -11,27 +11,31 @@
 <body>
     <!-- Hero banner -->
     <div class="hero-banner">
-        <h1 class="hero-title">Help Me Out</h1>
+        <h1 class="hero-title">Help Me Out 🛠️</h1>
     </div>
     <!-- Navbar -->
     <div class="navbar">
+        <a href="/">Home</a>
         <a href="#carpentry">Carpentry</a>
         <a href="#electrical">Electrical</a>
         <a href="#plumbing">Plumbing</a>
         <a href="#hvac">HVAC</a>
     </div>
-    <a href="/">Home</a>
     <h1>Sign In/Sign Up</h1>
     <div>
-        <button onclick="loginAsUser()">Sign up as Customer</button>
-        <a href="/userlog">Sign Up as Customer</a>
-    </div>
-    <div>
-        <button onclick="loginAsPro()">Sign up as Contractor</button>
-         <a href="/prolog">Sign Up as Pro</a>
+
+        <div class="button-container">
+            <button onclick="loginAsUser()">
+                <a href="/userlog">Sign Up as Customer</a>
+            </button>
+            <button onclick="loginAsPro()">
+                <a href="/prolog">Sign Up as Pro</a>
+            </button>
+        </div>
+
     </div>
 
-   {{{body}}}
+    {{{body}}}
 
 </body>
 
