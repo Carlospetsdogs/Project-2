@@ -6,6 +6,11 @@ const ProjectCategory = require('./projectCategory');
 
 // Define associations between models if needed
 
+
+// TO-DO connect models to eachother if required...
+
+
+
 module.exports = {
   Profile,
   UserLogin,
