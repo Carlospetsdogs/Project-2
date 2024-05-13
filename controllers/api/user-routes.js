@@ -1,14 +1,22 @@
+
+
 // app.js or server.js
 const express = require('express');
-const userRoutes = require('./routes/user-routes');
+const router = express.Router();
 
-const app = express();
 
-// Use user routes
-app.use('/api/users', userRoutes);
+router.post('/', (req, res) => // create a user // POST -> /api/users/ -> {}
+{
 
-// Start the server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  /* add auth lgoic later.. */
+
+  // later the auth data comes from req.session.user_id
+
+
+  res.send('send back a json object of the user')
+
 });
+
+
+
+module.exports = router;

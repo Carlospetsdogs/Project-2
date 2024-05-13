@@ -43,6 +43,7 @@ var userLogin = sequelize.define('userLogin', {
     allowNull: false
   }
 });
+
 userLogin.beforeCreate((userLogin, options) => {
   
   userLogin.password = bcrypt.hashSync(user.password, 10);

@@ -30,6 +30,7 @@ app.use(session({
   cookie: {
     expires: 600000
   }
+  // TO-DO make sure your sessions are using sequalize sessions
   }));
 
 app.use ((req, res, next) => {
