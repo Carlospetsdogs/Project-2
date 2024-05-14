@@ -1,8 +1,13 @@
 // models/profile.js
-const { DataTypes } = require('sequelize');
-const db = require('../config/database');
+const { DataTypes, Model } = require('sequelize');
+const db = require("../config/connection");
 
-const Profile = db.define('Profile', {
+
+class profile extends Model {};
+
+profile.init(
+{
+//const Profile = db.define('Profile', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -32,6 +37,10 @@ const Profile = db.define('Profile', {
     type: DataTypes.STRING,
     allowNull: true
   }
+  
+}, {
+  sequelize: db,
+  modelName: 'profile',
 });
 
-module.exports = Profile;
+module.exports = profile;

@@ -11,8 +11,9 @@ var sequelize = require('./config/connection');
 const morgan = require('morgan');
 
 
-
 // const helpers = require('./utils/helpers');
+
+const sessionStore = {};
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -23,15 +24,21 @@ app.use(morgan('dev'));
 app.use(cookieParser());
 
 app.use(session({
-  key: 'user_sid',
+  key: 'user_id',
   secret:'something',
   resave: false,
   saveUninitialized: false,
+  store: new SequelizeStore({
+    db: sequelize,
+  }),
+  resave: false,
+  proxy: true,
   cookie: {
     expires: 600000
   }
-  // TO-DO make sure your sessions are using sequalize sessions
   }));
+
+sequelize.sync();
 
 app.use ((req, res, next) => {
   if (req.cookies.user_sid && !req.session.user) {
@@ -49,6 +56,11 @@ var sessionChecker =(req,res,next)=> {
     next();
   }
 }
+
+//route home page
+app.get('/', sessionChecker, (req,res) => {
+  res.redirect('/index');
+});
 
 const sess = {
   secret: 'Super secret secret',
