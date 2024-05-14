@@ -4,6 +4,7 @@
 const express = require('express');
 const router = express.Router();
 
+const { userLogin } = require('../../models');
 
 router.post('/', (req, res) => // create a user // POST -> /api/users/ -> {}
 {

@@ -3,12 +3,14 @@ const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
-var bcrypt= require ('bcrypt');
 var cookieParser = require('cookie-parser');
-var user = require('./models/userLogin');
+//var user = require('models/userLogin');
 const routes = require('./controllers');
 var sequelize = require('./config/connection');
 const morgan = require('morgan');
+
+
+const sessionStore ={}
 
 
 // const helpers = require('./utils/helpers');
@@ -37,6 +39,7 @@ app.use(session({
     expires: 600000
   }
   }));
+sequelize.sync();
 
 sequelize.sync();
 
@@ -74,10 +77,12 @@ const sess = {
 
 app.use(session(sess));
 
-const hbs = exphbs.create({ }); //removed "helpers" for now, add back if needed
+const hbs = exphbs.create({extname: 'hbs', defaultLayout: 'layout', layoutsDir: __dirname + '/views/layouts/'}); //removed "helpers" for now, add back if needed
 
-app.engine('handlebars', hbs.engine);
-app.set('view engine', 'handlebars');
+app.engine('hbs', hbs.engine);
+app.set('view engine', 'hbs');
+
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
