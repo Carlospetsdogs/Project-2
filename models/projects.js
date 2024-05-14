@@ -1,4 +1,4 @@
-// models/projects.js
+// models/project.js
 const { DataTypes, Model } = require('sequelize');
 const db = require('../config/connection');
 const UserLogin = require('./userLogin');

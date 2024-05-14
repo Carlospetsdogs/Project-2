@@ -9,9 +9,13 @@ const routes = require('./controllers');
 var sequelize = require('./config/connection');
 const morgan = require('morgan');
 
+
 const sessionStore ={}
 
+
 // const helpers = require('./utils/helpers');
+
+const sessionStore = {};
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -35,6 +39,8 @@ app.use(session({
     expires: 600000
   }
   }));
+sequelize.sync();
+
 sequelize.sync();
 
 app.use ((req, res, next) => {

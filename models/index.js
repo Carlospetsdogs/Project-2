@@ -1,9 +1,9 @@
 // models/index.js
 const userProfile = require('./userProfile');
-const userLogin = require('./userLogin');
-const projects = require('./projects');
-const projectCategories = require('./projectCategories');
-//
+const userLogin = require('.models/userLogin');
+const project = require('./projects');
+const projectCategories = require('./models/projectCategories.js');
+
 // Define associations between models if needed
 
 
