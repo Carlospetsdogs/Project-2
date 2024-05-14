@@ -1,9 +1,11 @@
 // models/project.js
-const { DataTypes } = require('sequelize');
-const db = require('../config/database');
+const { DataTypes, Model } = require('sequelize');
+const db = require('../config/connection');
 const UserLogin = require('./userLogin');
 
-const Project = db.define('Project', {
+class projects extends Model {};
+
+projects.init({
   projectId: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -33,6 +35,10 @@ const Project = db.define('Project', {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW
   }
+}, {
+  sequelize: db,
+  modelName: 'projects',
+  freezeTableName: true,
 });
 
-module.exports = Project;
+module.exports = projects;

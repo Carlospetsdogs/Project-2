@@ -1,8 +1,8 @@
 // models/index.js
-const Profile = require('./profile');
-const UserLogin = require('./UserLogin');
-const Project = require('./project');
-const ProjectCategory = require('./projectCategory');
+const userProfile = require('./userProfile');
+const userLogin = require('.models/userLogin');
+const project = require('./projects');
+const projectCategories = require('./models/projectCategories.js');
 
 // Define associations between models if needed
 
@@ -12,8 +12,8 @@ const ProjectCategory = require('./projectCategory');
 
 
 module.exports = {
-  Profile,
-  UserLogin,
-  Project,
-  ProjectCategory
+  userProfile,
+  userLogin,
+  projects,
+  projectCategories
 };

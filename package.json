@@ -26,13 +26,12 @@
     "express": "^4.19.2",
     "express-handlebars": "^7.1.2",
     "express-session": "^1.18.0",
-    
     "mysql2": "^3.9.7",
     "pg": "^8.11.5",
     "sequelize": "^6.37.3"
   },
   "devDependencies": {
-    "node-dev": "^8.0.0",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "node-dev": "^8.0.0"
   }
 }
