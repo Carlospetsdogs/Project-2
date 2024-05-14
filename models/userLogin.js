@@ -1,60 +1,75 @@
-// models/userLogin.js
-const { DataTypes } = require('sequelize');
-const db = require('../config/connection.js');
-var bcrypt= require ('bcrypt');
-var Sequelize = require('sequelize');
-const env = require('dotenv').config();
+/// models/userLogin.js
+const { Sequalize,DataTypes, Model } = require('sequelize');
+const bcrypt = require('bcrypt');
+const Sequelize = require('sequelize');
+
+const db = require("../config/connection");
 
 
-// Connect to MySQL
-const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
-  host: 'localhost',
-  dialect: 'mysql',
-  port: 3306,
-  pool: {
-    max: 5,
-    min: 0,
-    acquire: 30000,
-    idle: 10000
-  },
-  operatorsAliases: false
-});
-  
 
-// user model
-var userLogin = sequelize.define('userLogin', {
-  userId: {
-    type: Sequelize.INTEGER,
-        unique: true,
-        allowNull: false,
-        primaryKey: true,
-        autoIncrement: true
-  },
-  userRoleId: {
-    type: Sequelize.INTEGER,
-    allowNull: false
-  },
-  emailAddress: {
-    type:  Sequelize.STRING,
-    allowNull: true
-  },
-  password: {
-    type:  Sequelize.STRING,
-    allowNull: false
+class user extends Model {
+  checkPassword(loginPw) {
+    return bcrypt.compareSync(loginPw, this.password);
   }
-});
+}
 
-userLogin.beforeCreate((userLogin, options) => {
-  
-  userLogin.password = bcrypt.hashSync(user.password, 10);
-});
-userLogin.prototype.validPassword = function(password) {
-  return bcrypt.compareSync(password, this.password);
-};
+user.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      unique: true,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: true,
+      },
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [8],
+      },
+    },
+    userRoleId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'userRole',
+        key: 'id',
+      },
+    }
+  },
+  {
+    hooks: {
+      beforeCreate: async (newUserData) => {
+        newUserData.password = await bcrypt.hash(newUserData.password, 10);
+        return newUserData;
+      },
+      beforeUpdate: async (updatedUserData) => {
+        updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+        return updatedUserData;
+      },
+    },
+    sequelize: db,
+    timestamps: false,
+    freezeTableName: true,
+    underscored: true,
+    modelName: 'userLogin',
+  }
+);
 
-sequelize.sync()
-  .then(() =>console.log('Users table has been successfully created, if one doesn\'t exist'))
-    .catch(error => console.log('This error occured', error));
-  
+// sequalize.sync()
+// .then(() => console.log('userLogin table created! if one does not exsist.'))
+//   .catch(error => console.log('error creating userLogin table', error));
 
-module.exports = userLogin;
+  module.exports = user;
