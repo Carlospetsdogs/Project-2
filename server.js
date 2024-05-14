@@ -15,8 +15,6 @@ const sessionStore ={}
 
 // const helpers = require('./utils/helpers');
 
-const sessionStore = {};
-
 const app = express();
 const PORT = process.env.PORT || 3001;
 app.use(express.json())
