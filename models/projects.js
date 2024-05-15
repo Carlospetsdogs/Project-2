@@ -27,6 +27,10 @@ projects.init({
     type: DataTypes.TEXT,
     allowNull: true
   },
+  projectCategory: {
+    type: DataTypes.TEXT,
+    allowNull: false
+  },
   createdAt: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW
