@@ -2,15 +2,15 @@ const router = require("express").Router()
 
 
 router.get("/", (req, res)=> {
-    res.render("homepage.handlebars")
+    res.render("homepage")
 })
 
 router.get("/prolog", (req, res)=> {
-    res.render("proLogin.handlebars")
+    res.render("proLogin")
 })
 
 router.get("/userlog", (req, res)=> {
-    res.render("userLogin.handlebars")
+    res.render("userLogin")
 })
 
 
