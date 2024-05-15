@@ -11,14 +11,14 @@ projects.init({
     primaryKey: true,
     autoIncrement: true
   },
-  userId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: UserLogin,
-      key: 'userId'
-    }
-  },
+  // userId: {
+  //   type: DataTypes.INTEGER,
+  //   allowNull: false,
+  //   references: {
+  //     model: "",
+  //     key: 'userId'
+  //   }
+  // },
   projectName: {
     type: DataTypes.STRING,
     allowNull: false

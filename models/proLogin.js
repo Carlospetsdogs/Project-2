@@ -7,13 +7,13 @@ const db = require("../config/connection");
 
 
 
-class user extends Model {
+class proUser extends Model {
   checkPassword(loginPw) {
     return bcrypt.compareSync(loginPw, this.password);
   }
 }
 
-user.init(
+proUser.init(
   {
     userId: {
       type: DataTypes.INTEGER,
@@ -41,11 +41,6 @@ user.init(
         len: [8],
       },
     },
-    contractor: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-    },
-    
     userRoleId: {
       type: DataTypes.INTEGER,
       references: {
@@ -69,7 +64,7 @@ user.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'userLogin',
+    modelName: 'proUser',
   }
 );
 
@@ -77,4 +72,4 @@ user.init(
 // .then(() => console.log('userLogin table created! if one does not exsist.'))
 //   .catch(error => console.log('error creating userLogin table', error));
 
-  module.exports = user;
+  module.exports = proUser;

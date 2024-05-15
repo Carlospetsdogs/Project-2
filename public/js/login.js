@@ -40,6 +40,31 @@ function checkProAuthentication(req) {
     return true; // Placeholder logic, replace with actual authentication logic
 }
 
+const signup = async (event) => {
+    event.preventDefault();
+
+    const name = document.querySelector('#name-signup').value.trim();
+    const email = document.querySelector('#email-signup').value.trim();
+    const password = document.querySelector('#password-signup').value.trim();
+    const contractor = document.querySelector('#contractor-signup').value.trim();
+    console.log("HEEEEYYY",contractor)
+    if (name && email && password) {
+        const response = await fetch('/api/users/', {
+            method: 'POST',
+            body: JSON.stringify({ name, email, password, contractor }),
+            headers: { 'Content-Type': 'application/json' },
+        });
+
+        if (response.ok) {
+            // condition for redirecting depending on if contractor === true
+            document.location.replace('/'); /// set up redirect once dashboard or profile page is created
+        } else {
+            alert('Failed to sign up');
+        }
+    }
+};
+document.querySelector('.signup-form').addEventListener('submit', signup);
+
 module.exports = {
     loginAsUser,
     loginAsPro
