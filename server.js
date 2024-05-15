@@ -52,8 +52,9 @@ app.get('/main', (req, res) => {
 });
 
 
-const hbs = exphbs.create({
-});
+const hbs = exphbs.create({});
+hbs.handlebars.registerPartial('homepage', __dirname + '/views/homepage');
+
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
@@ -63,8 +64,3 @@ app.use(routes);
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log('Now listening on port', PORT));
 });
-
-
-const hbs = exphbs.create({
-});
-
