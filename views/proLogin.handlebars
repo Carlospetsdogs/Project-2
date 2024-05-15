@@ -1,44 +1,102 @@
-<h2>Pro Signup</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro Signup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        h2 {
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 30px;
+        }
+        .signup-form {
+            width: 300px;
+            margin: 0 auto;
+            background-color: #4CAF50;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #000407;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .form-group input[type="checkbox"] {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Pro Signup</h2>
 
-<form class="form signup-form">
-    <div class="form-group">
-        <label for="name-signup">name:</label>
-        <input class="form-input" type="text" id="name-signup" />
-    </div>
-    <div class="form-group">
-        <label for="email-signup">email:</label>
-        <input class="form-input" type="text" id="email-signup" />
-    </div>
-    <div class="form-group">
-        <label for="phone-signup">phone:</label>
-        <input class="form-input" type="text" id="phone-signup" />
-    </div>
-    <div class="form-group">
-        <label for="focus">
-        <button class="btn btn-primary" type="submit">Trades</button>
-        </label>
-        <label>
-            <input type="checkbox" name="service" value="carpentry">
-            Carpentry
-        </label><br>
-        <label>
-            <input type="checkbox" name="service" value="electrical">
-            Electrical
-        </label><br>
-        <label>
-            <input type="checkbox" name="service" value="plumbing">
-            Plumbing
-        </label><br>
-        <label>
-            <input type="checkbox" name="service" value="hvac">
-            HVAC
-        </label><br>
-    </div>
-    <div class="form-group">
-        <label for="password-signup">password:</label>
-        <input class="form-input" type="password" id="password-signup" />
-    </div>
-    <div class="form-group">
-        <button class="btn btn-primary" type="submit">signup</button>
-    </div>
-</form>
+    <form class="form signup-form">
+        <div class="form-group">
+            <label for="name-signup">Name:</label>
+            <input class="form-input" type="text" id="name-signup" />
+        </div>
+        <div class="form-group">
+            <label for="email-signup">Email:</label>
+            <input class="form-input" type="text" id="email-signup" />
+        </div>
+        <div class="form-group">
+            <label for="phone-signup">Phone:</label>
+            <input class="form-input" type="text" id="phone-signup" />
+        </div>
+        <div class="form-group">
+            <label>Skill(s):</label>
+            <label>
+                <input type="checkbox" name="service" value="carpentry">
+                Carpentry
+            </label><br>
+            <label>
+                <input type="checkbox" name="service" value="electrical">
+                Electrical
+            </label><br>
+            <label>
+                <input type="checkbox" name="service" value="plumbing">
+                Plumbing
+            </label><br>
+            <label>
+                <input type="checkbox" name="service" value="hvac">
+                HVAC
+            </label><br>
+        </div>
+        <div class="form-group">
+            <label for="password-signup">Password:</label>
+            <input class="form-input" type="password" id="password-signup" />
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit">Signup</button>
+        </div>
+    </form>
+</body>
+</html>

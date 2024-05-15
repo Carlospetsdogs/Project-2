@@ -41,18 +41,6 @@ user.init(
         len: [8],
       },
     },
-    contractor: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-    },
-    
-    userRoleId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'profile',
-        key: 'id',
-      },
-    }
   },
   {
     hooks: {

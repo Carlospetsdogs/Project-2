@@ -15,7 +15,7 @@ projects.init({
   //   type: DataTypes.INTEGER,
   //   allowNull: false,
   //   references: {
-  //     model: "",
+
   //     key: 'userId'
   //   }
   // },
@@ -26,6 +26,10 @@ projects.init({
   description: {
     type: DataTypes.TEXT,
     allowNull: true
+  },
+  projectCategory: {
+    type: DataTypes.TEXT,
+    allowNull: false
   },
   createdAt: {
     type: DataTypes.DATE,
