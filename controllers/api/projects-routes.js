@@ -9,10 +9,8 @@ const User = require('../../models/userProfile.js'); // Import User model
 // get all projects/ filtered projects GET by all projects assigned to me and all unassigned projects
 router.get('/', async (req, res) => {
   try {
-    // Check if query parameter 'filter' exists
-    const filter = req.query.filter;
+    const filter = req.query.filter || 'all'; // Default to 'all' if 'filter' is not provided
 
-    // Fetch all projects from the database
     let projects;
     if (filter === 'unassigned') {
       // Fetch all unassigned projects
@@ -24,11 +22,14 @@ router.get('/', async (req, res) => {
       projects = await Project.findAll({
         where: { userId: { [Op.not]: null } } // Assuming 'userId' is the foreign key for user assignment
       });
-    } else {
+    } else if (filter === 'all') { // Change to 'all' for clarity
       // Fetch all projects (no filtering)
       projects = await Project.findAll();
+    } else {
+      // Invalid filter value
+      return res.status(400).json({ error: 'Invalid filter value' });
     }
-
+  
     // Return projects as JSON response
     res.json(projects);
   } catch (error) {
@@ -37,6 +38,8 @@ router.get('/', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
+  
 
 
 // Get a single project by project_id
@@ -61,40 +64,87 @@ router.get('/:project_id', async (req, res) => {
   }
 });
 
+// Create a new project
+// later the auth data comes from req.session.user_id
+router.post('/', async (req, res) => {
+  try {
+    // Extract data from request body
+    const { name, description } = req.body;
 
-  // later the auth data comes from req.session.user_id
-  router.post('/', async (req, res) => {
-      try {
-          // Extract data from request body
-          const { name, description } = req.body;
-  
-          // Create a new project in the database
-          const newProject = await Project.create({
-              name: name,
-              description: description
-          });
-  
-          // Send response indicating successful creation of the project
-          res.send(`Project created with the new ID: ${newProject.id}`);
-      } catch (error) {
-          // Handle any errors that occur during project creation
-          console.error('Error creating project:', error);
-          res.status(500).send('Error creating project');
-      }
-  });
-  
+    // Create a new project in the database
+    const newProject = await Project.create({
+      name: name,
+      description: description
+    });
 
-router.put('/', (req, res) => // update a project
-{
-
-  res.send('project that was created with the new id {id: 324234}')
-
+    // Send response indicating successful creation of the project
+    res.send(`Project created with the new ID: ${newProject.id}`);
+  } catch (error) {
+    // Handle any errors that occur during project creation
+    console.error('Error creating project:', error);
+    res.status(500).send('Error creating project');
+  }
 });
 
-router.delete('/:project_id', (req, res) => // delete project
-{
-  res.send('project that ws created with the new id {id: 324234}')
+// Update an existing project
+router.put('/', async (req, res) => {
+  try {
+      // Extract data from request body
+      const { projectId, updatedDetails } = req.body;
+      
+      // Check if the user is logged in and has permission to update the project
+      // (You may need to implement authentication and authorization middleware)
 
+      // Find the project in the database
+      const project = await Project.findById(projectId);
+
+      if (!project) {
+          return res.status(404).send('Project not found');
+      }
+
+      // Update the project with the new details
+      Object.assign(project, updatedDetails); // Merge updatedDetails into project object
+      await project.save(); // Save the updated project to the database
+
+      // Send response indicating successful update of the project
+      res.send(`Project with ID ${projectId} has been updated`);
+  } catch (error) {
+      // Handle any errors that occur during project update
+      console.error('Error updating project:', error);
+      res.status(500).send('Error updating project');
+  }
+});
+
+router.delete('/:project_id', async (req, res) => {
+  try {
+      // Extract project ID from request parameters
+      const projectId = req.params.project_id;
+      
+      // Check if the user is logged in and has permission to delete the project
+      // (You may need to implement authentication and authorization middleware)
+
+      // Find the project in the database
+      const project = await Project.findById(projectId);
+
+      if (!project) {
+          return res.status(404).send('Project not found');
+      }
+
+      // Check if the logged-in user is the creator of the project (assuming you have user authentication implemented)
+      if (project.createdBy !== req.user.id) {
+          return res.status(403).send('You do not have permission to delete this project');
+      }
+
+      // Delete the project from the database
+      await project.remove();
+
+      // Send response indicating successful deletion of the project
+      res.send(`Project with ID ${projectId} has been deleted`);
+  } catch (error) {
+      // Handle any errors that occur during project deletion
+      console.error('Error deleting project:', error);
+      res.status(500).send('Error deleting project');
+  }
 });
 
 
@@ -105,7 +155,7 @@ router.put('/;project_id/:pro_id', (req, res) => // update a project // PUT -> /
 
   res.send('project that ws created with the new id {id: 324234}')
 
-}); 
+});
 
 
 module.exports = router;

@@ -65,8 +65,6 @@ sequelize.sync({ force: false }).then(() => {
 });
 
 
-
-
-
-
+const hbs = exphbs.create({
+});
 
