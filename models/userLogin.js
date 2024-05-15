@@ -1,7 +1,7 @@
 /// models/userLogin.js
-const { Sequalize,DataTypes, Model } = require('sequelize');
+const { Sequelize,DataTypes, Model } = require('sequelize');
 const bcrypt = require('bcrypt');
-const Sequelize = require('sequelize');
+
 
 const db = require("../config/connection");
 
@@ -15,7 +15,7 @@ class user extends Model {
 
 user.init(
   {
-    id: {
+    userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       unique: true,

@@ -7,7 +7,7 @@ class profile extends Model {};
 
 profile.init(
 {
-//const Profile = db.define('Profile', {
+
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
