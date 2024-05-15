@@ -15,7 +15,7 @@ projects.init({
   //   type: DataTypes.INTEGER,
   //   allowNull: false,
   //   references: {
-  //     model: "userLogin",
+
   //     key: 'userId'
   //   }
   // },
