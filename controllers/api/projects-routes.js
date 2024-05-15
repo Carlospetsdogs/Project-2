@@ -4,9 +4,7 @@ const router = require("express").Router();
 const User = require('../../models/userProfile.js'); // Import User model
 
 
-// POST user to create a project, del., modify project /api/projects -> POST -> {}
-
-// get all projects/ filtered projects GET by all projects assigned to me and all unassigned projects
+// GET by all projects, Filtered by All, Assigned to User(Pro) and Unassigned
 router.get('/', async (req, res) => {
   try {
     const filter = req.query.filter || 'all'; // Default to 'all' if 'filter' is not provided
@@ -29,7 +27,7 @@ router.get('/', async (req, res) => {
       // Invalid filter value
       return res.status(400).json({ error: 'Invalid filter value' });
     }
-  
+
     // Return projects as JSON response
     res.json(projects);
   } catch (error) {
@@ -39,7 +37,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-  
+
 
 
 // Get a single project by project_id
@@ -69,16 +67,13 @@ router.get('/:project_id', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     // Extract data from request body
-    const { name, description } = req.body;
+    //const { projectName, description, userId } = req.body;
 
     // Create a new project in the database
-    const newProject = await Project.create({
-      name: name,
-      description: description
-    });
+    const newProject = await Project.create(req.body);
 
     // Send response indicating successful creation of the project
-    res.send(`Project created with the new ID: ${newProject.id}`);
+    res.send(`Project created with the new ID: ${newProject.projectId}`);
   } catch (error) {
     // Handle any errors that occur during project creation
     console.error('Error creating project:', error);
@@ -87,76 +82,73 @@ router.post('/', async (req, res) => {
 });
 
 // Update an existing project
-router.put('/', async (req, res) => {
+router.put('/:project_id', async (req, res) => {
   try {
-      // Extract data from request body
-      const { projectId, updatedDetails } = req.body;
-      
-      // Check if the user is logged in and has permission to update the project
-      // (You may need to implement authentication and authorization middleware)
+    // Extract data from request body
+    const  updateProjectId = req.params.project_id
+    console.log(updateProjectId)
+    const updatedDetails = {
+      projectId: 2,
+      projectName: "name444",
+      description: "description444",
+      userId: 1
+    }
 
-      // Find the project in the database
-      const project = await Project.findById(projectId);
+    // Check if the user is logged in and has permission to update the project
+    // (You may need to implement authentication and authorization middleware)
 
-      if (!project) {
-          return res.status(404).send('Project not found');
-      }
+    // Find the project in the database
+    const project = await Project.update(updatedDetails,{
+      where: {projectId: updateProjectId}
+  });
 
-      // Update the project with the new details
-      Object.assign(project, updatedDetails); // Merge updatedDetails into project object
-      await project.save(); // Save the updated project to the database
+    if (!project) {
+      return res.status(404).send('Project not found');
+    }
 
-      // Send response indicating successful update of the project
-      res.send(`Project with ID ${projectId} has been updated`);
+    // Send response indicating successful update of the project
+    res.send(`Project with ID ${updateProjectId} has been updated`);
   } catch (error) {
-      // Handle any errors that occur during project update
-      console.error('Error updating project:', error);
-      res.status(500).send('Error updating project');
+    // Handle any errors that occur during project update
+    console.error('Error updating project:', error);
+    res.status(500).send('Error updating project');
   }
 });
 
+
+// Delete a project
 router.delete('/:project_id', async (req, res) => {
   try {
-      // Extract project ID from request parameters
-      const projectId = req.params.project_id;
-      
-      // Check if the user is logged in and has permission to delete the project
-      // (You may need to implement authentication and authorization middleware)
+    // Extract project ID from request parameters
+    const projectId = req.params.project_id;
 
-      // Find the project in the database
-      const project = await Project.findById(projectId);
+    // Check if the user is logged in and has permission to delete the project
+    // (You may need to implement authentication and authorization middleware)
 
-      if (!project) {
-          return res.status(404).send('Project not found');
-      }
+    // Find the project in the database
+    const project = await Project.destroy({
+      where: {projectId: req.params.project_id}
+    });
 
-      // Check if the logged-in user is the creator of the project (assuming you have user authentication implemented)
-      if (project.createdBy !== req.user.id) {
-          return res.status(403).send('You do not have permission to delete this project');
-      }
+    if (!project) {
+      return res.status(404).send('Project not found');
+    }
 
-      // Delete the project from the database
-      await project.remove();
+    // Check if the logged-in user is the creator of the project (assuming you have user authentication implemented)
+    // if (project.createdBy !== req.user.id) {
+    //   return res.status(403).send('You do not have permission to delete this project');
+    // }
 
-      // Send response indicating successful deletion of the project
-      res.send(`Project with ID ${projectId} has been deleted`);
+
+
+    // Send response indicating successful deletion of the project
+    res.send(`Project with ID ${projectId} has been deleted`);
   } catch (error) {
-      // Handle any errors that occur during project deletion
-      console.error('Error deleting project:', error);
-      res.status(500).send('Error deleting project');
+    // Handle any errors that occur during project deletion
+    console.error('Error deleting project:', error);
+    res.status(500).send('Error deleting project');
   }
 });
-
-
-router.put('/;project_id/:pro_id', (req, res) => // update a project // PUT -> /api/projects/39432432/982934832984
-{
-
-  // update project req.params.project_id and assing it the pro from the params -> req.params.pro_id
-
-  res.send('project that ws created with the new id {id: 324234}')
-
-});
-
 
 module.exports = router;
 

@@ -41,13 +41,13 @@ user.init(
         len: [8],
       },
     },
-    userRoleId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'userRole',
-        key: 'id',
-      },
-    }
+    // userRoleId: {
+    //   type: DataTypes.INTEGER,
+    //   references: {
+    //     model: 'profile',
+    //     key: 'id',
+    //   },
+    // }
   },
   {
     hooks: {
