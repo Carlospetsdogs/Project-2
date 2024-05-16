@@ -48,34 +48,13 @@ router.post('/userLogin', (req,res)=> {
     password: req.body.password
   })
   .then(user => {
-    req.session.user = user.dataValues;
+    req.session.user = user.dataValues; // {"userId": "sadkfasdfkjsadf"}
     res.redirect('/dashboard');
   })
   .catch(error => {
     res.redirect('/userLogin');
   });
 });
-
-//route for user login
-/*router.get('/proLogin', sessionChecker,(req,res) => { // GET -> /api/users/login
-  res.render('proLogin', {});
-});
-router.post('/proLogin', (req,res)=> {
-  var email = req.body.email;
-  var password = req.body.password;
-  user.findOne({where: {email: email}}).then(function (user) {
-    if(!user) {
-      res.redirect('/proLogin');
-    } else if (!user.validPassword(password)) {
-      res.redirect('/proLogin');
-    } else {
-      req.session.user = user.dataValues;
-      res.redirect('/dashboard');
-    }
-  });
-});*/
-
-
 
   /* add auth lgoic later.. */
 
