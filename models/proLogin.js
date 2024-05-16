@@ -47,6 +47,10 @@ proUser.init(
         model: 'profile',
         key: 'id',
       },
+    contractor: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      },
     }
   },
   {

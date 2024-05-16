@@ -3,9 +3,40 @@ const Project = require('../../models/projects.js');
 const router = require("express").Router();
 const User = require('../../models/userProfile.js'); // Import User model
 
+const userMiddlewareChecker = (req, res, next) => {
+  // Check if the user is logged in and their role is set in the session
+  if (!req.session || !req.session.role) {
+    // If the session or role is not set, redirect to the homepage or login page
+    return res.redirect('/');
+  }
+
+  // Get the role from the session
+  const role = req.session.role;
+
+  // Check the role and set the loginType accordingly
+  let loginType;
+  if (role === 1) {
+    loginType = 'user'; // User role
+  } else if (role === 2) {
+    loginType = 'pro'; // Pro role
+  } else {
+    // If the role is neither 1 nor 2, redirect to the homepage or login page
+    return res.redirect('/');
+  }
+
+  // If the user is not a regular user, redirect to the homepage or login page
+  if (loginType !== 'user') {
+    return res.redirect('/');
+  }
+
+  // If everything is fine, proceed to the next middleware or route handler
+  next();
+};
+
+
 
 // GET by all projects, Filtered by All, Assigned to User(Pro) and Unassigned
-router.get('/', async (req, res) => {
+router.get('/', userMiddlewareChecker, async (req, res) => {
   try {
     const filter = req.query.filter || 'all'; // Default to 'all' if 'filter' is not provided
 
@@ -64,7 +95,7 @@ router.get('/:project_id', async (req, res) => {
 
 // Create a new project
 // later the auth data comes from req.session.user_id
-router.post('/', async (req, res) => {
+router.post('/',userMiddlewareChecker, async (req, res) => {
   try {
     // Extract data from request body
     //const { projectName, description, userId } = req.body;
@@ -94,9 +125,6 @@ router.put('/:project_id', async (req, res) => {
       userId: 1
     }
 
-    // Check if the user is logged in and has permission to update the project
-    // (You may need to implement authentication and authorization middleware)
-
     // Find the project in the database
     const project = await Project.update(updatedDetails,{
       where: {projectId: updateProjectId}
@@ -122,9 +150,6 @@ router.delete('/:project_id', async (req, res) => {
     // Extract project ID from request parameters
     const projectId = req.params.project_id;
 
-    // Check if the user is logged in and has permission to delete the project
-    // (You may need to implement authentication and authorization middleware)
-
     // Find the project in the database
     const project = await Project.destroy({
       where: {projectId: req.params.project_id}
@@ -133,13 +158,6 @@ router.delete('/:project_id', async (req, res) => {
     if (!project) {
       return res.status(404).send('Project not found');
     }
-
-    // Check if the logged-in user is the creator of the project (assuming you have user authentication implemented)
-    // if (project.createdBy !== req.user.id) {
-    //   return res.status(403).send('You do not have permission to delete this project');
-    // }
-
-
 
     // Send response indicating successful deletion of the project
     res.send(`Project with ID ${projectId} has been deleted`);

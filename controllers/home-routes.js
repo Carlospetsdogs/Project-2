@@ -19,11 +19,11 @@ router.get("/", async(req, res)=> {
 })
 
 router.get("/prolog", (req, res)=> {
-    res.render("proLogin")
+    res.render("proLogin", {session: req.session})
 })
 
 router.get("/userlog", (req, res)=> {
-    res.render("userLogin")
+    res.render("userLogin", {session: req.session})
 })
 
 
