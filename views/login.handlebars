@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In</title>
+</head>
+<body>
+    {{#if session.user}}
+<h2>Welcome user!!!</h2>
+
+
+<form class="form sign-in-form"></form>
+<div class="form-group">
+    <label for="email-signup">Email:</label>
+    <input class="form-input" type="text" id="email-signup" />
+</div>
+<div class="form-group">
+    <label for="password-signup">Password:</label>
+    <input class="form-input" type="password" id="password-signup" />
+</div>
+</body>
+</html>
