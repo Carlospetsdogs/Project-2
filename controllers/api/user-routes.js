@@ -16,20 +16,21 @@ var sessionChecker =(req,res,next)=> {
 
 
 
-
 const { userLogin } = require('../../models');
-
 /// /api/users/
 router.post('/', async(req, res) => {
 try {
+  console.log(req.body)
   const userData = await userLogin.create(req.body);
   req.session.save(() => {
-    req.session.user_id = userData.user_id;
+    req.session.userId = userData.userId;
+    req.session.userRoleId = userData.userRoleId
     req.session.logged_in = true;
     res.status(200).json(userData);
   });
 } catch (err) {
-  res.status(400).json(err);
+  console.log(err)
+  res.status(400).json(err); 
 }
 }) // create a user // POST -> /api/users/ -> {}
 
@@ -56,9 +57,11 @@ router.post('/userLogin', (req,res)=> {
   });
 });
 
-  /* add auth lgoic later.. */
+router.post('/logout' , (req, res) => {
+  req.session.destroy()
+  res.redirect('/')
+})
 
-  // later the auth data comes from req.session.user_id
 
 
  

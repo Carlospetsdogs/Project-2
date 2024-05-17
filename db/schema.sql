@@ -15,8 +15,9 @@ CREATE TABLE profile (
 CREATE TABLE userLogin (
     `userId` INT(10) NOT NULL PRIMARY KEY AUTO_INCREMENT ,
     `userRoleId` INT(1) NOT NULL,
-    `emailAddress` VARCHAR(50) DEFAULT NULL,
-    `password` VARCHAR(50) DEFAULT NULL
+    `name` VARCHAR(50) NOT NULL,
+    `email` VARCHAR(50) DEFAULT NULL,
+    `password` VARCHAR(100) DEFAULT NULL
 );
 
 -- Table for projects 

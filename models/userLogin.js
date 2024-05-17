@@ -21,10 +21,12 @@ user.init(
       unique: true,
       primaryKey: true,
       autoIncrement: true,
+      field: 'userId',
     },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      field: 'name',
     },
     email: {
       type: DataTypes.STRING,
@@ -33,17 +35,20 @@ user.init(
       validate: {
         isEmail: true,
       },
+      field: 'email',
     },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [8],
+        min: 8,
       },
+      field: 'password',
     },
     userRoleId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      field: 'userRoleId',
     },
   },
   {
@@ -65,8 +70,5 @@ user.init(
   }
 );
 
-// sequalize.sync()
-// .then(() => console.log('userLogin table created! if one does not exsist.'))
-//   .catch(error => console.log('error creating userLogin table', error));
 
   module.exports = user;
