@@ -46,12 +46,12 @@ const signup = async (event) => {
     const name = document.querySelector('#name-signup').value.trim();
     const email = document.querySelector('#email-signup').value.trim();
     const password = document.querySelector('#password-signup').value.trim();
-    const contractor = document.querySelector('#contractor-signup').value.trim();
-    console.log("HEEEEYYY",contractor)
+    const type = document.querySelector('#user-type').value.trim();
+
     if (name && email && password) {
         const response = await fetch('/api/users/', {
             method: 'POST',
-            body: JSON.stringify({ name, email, password, contractor }),
+            body: JSON.stringify({ name, email, password, userRoleId: type }),
             headers: { 'Content-Type': 'application/json' },
         });
 
@@ -63,9 +63,11 @@ const signup = async (event) => {
         }
     }
 };
-document.querySelector('.signup-form').addEventListener('submit', signup);
 
-module.exports = {
-    loginAsUser,
-    loginAsPro
-};
+if (document.querySelector('.login-form')) {
+    document.querySelector('.login-form').addEventListener('submit', loginAsUser);
+}
+
+if (document.querySelector('.signup-form')){
+ document.querySelector('.signup-form').addEventListener('submit', signup);
+}

@@ -20,5 +20,6 @@ const addProject = async function(event){
     alert("successfully added project")
 }
 
-document.querySelector("#projectBtn")
-.addEventListener("click", addProject)
+if (document.querySelector("#projectBtn")) {
+    document.querySelector("#projectBtn").addEventListener("click", addProject)
+}
