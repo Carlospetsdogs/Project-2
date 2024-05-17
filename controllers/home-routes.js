@@ -26,5 +26,12 @@ router.get("/userlog", (req, res)=> {
     res.render("userLogin", {session: req.session})
 })
 
+router.get("/login", (req, res) =>{
+    res.render("login", {session: req.session})
+})
+
+// router.get("/userDashboard", (req ,res) =>{
+//     res.render("login", {session: req.session})
+// })
 
 module.exports = router
