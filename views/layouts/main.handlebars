@@ -36,17 +36,22 @@
         <a href="#plumbing">Plumbing</a>
         <a href="#hvac">HVAC</a>
     </div>
-    <h1>Sign In/Sign Up</h1>
-    <div>
-        <div class="button-container">
-            <button onclick="loginAsUser()">
-                <a href="/userlog">Sign Up as Customer</a>
-            </button>
-            <button onclick="loginAsPro()">
-                <a href="/prolog">Sign Up as Pro</a>
-            </button>
+
+    {{#if session.user}}
+    {{else}}
+
+        <h1>Sign In/Sign Up</h1>
+        <div>
+            <div class="button-container">
+                <button onclick="loginAsUser()">
+                    <a href="/userlog">Sign Up as Customer</a>
+                </button>
+                <button onclick="loginAsPro()">
+                    <a href="/prolog">Sign Up as Pro</a>
+                </button>
+            </div>
         </div>
-    </div>
+    {{/if}}
 
     <!-- ChatGPT Assistance Section -->
     <h1>ChatGPT Assistance</h1>
@@ -55,6 +60,11 @@
             <button onclick="askQuestion()">Ask a Question</button>
         </div>
     </div>
+
+
+{{{body}}}
+
+
     <script>
         async function askQuestion() {
             const question = prompt("What's your question?");
@@ -83,6 +93,8 @@
             }
         }
     </script>
+    <script src="/js/login.js"></script>
+
 </body>
-{{{body}}}
+
 </html>

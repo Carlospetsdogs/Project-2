@@ -24,7 +24,7 @@ router.post('/', async(req, res) => {
 try {
   const userData = await userLogin.create(req.body);
   req.session.save(() => {
-    req.session.user_id = userData.user_id;
+    req.session.user = userData.get({ plain: true });
     req.session.logged_in = true;
     res.status(200).json(userData);
   });
@@ -48,7 +48,10 @@ router.post('/userLogin', (req,res)=> {
     password: req.body.password
   })
   .then(user => {
-    req.session.user = user.dataValues; // {"userId": "sadkfasdfkjsadf"}
+   
+    req.session.user = userData.get({ plain: true });
+    req.session.logged_in = true;
+
     res.redirect('/dashboard');
   })
   .catch(error => {

@@ -1,5 +1,5 @@
 /// models/userLogin.js
-const { Sequelize,DataTypes, Model } = require('sequelize');
+const { Sequelize,DataTypes, Model, INTEGER } = require('sequelize');
 const bcrypt = require('bcrypt');
 
 
@@ -40,6 +40,10 @@ user.init(
       validate: {
         len: [8],
       },
+    },
+    userRoleId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
   },
   {

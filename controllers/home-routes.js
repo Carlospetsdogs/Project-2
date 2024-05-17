@@ -2,19 +2,10 @@ const router = require("express").Router()
 const UserLogin = require("../models/userLogin")
 
 router.get("/", async(req, res)=> {
-    try {
-        const userData = await UserLogin.findAll({
-            attributes: {exclude: ["password"]}
-        })
-        
-        const users = userData.map((user)=> user.get({plain: true}))
-         
-        res.render("homepage", {users})
-    }
-    catch(err){
-        res.status(500).json(err)
     
-    }
+    console.log(req.session);
+    
+    res.render("homepage", {session: req.session});
    
 })
 
