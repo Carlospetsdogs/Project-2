@@ -4,7 +4,7 @@ function loginAsUser(req, res, next) {
 
     if (isAuthenticated) {
         // If user is authenticated, you can redirect to a specific route or send a success response
-        res.redirect('/dashboard'); // Redirect to the dashboard page for regular users
+        res.redirect('dashboard'); // Redirect to the dashboard page for regular users
     } else {
         // If user is not authenticated, you can render a login page or send an error response
         res.status(401).send('Unauthorized'); // Send 401 Unauthorized status
@@ -27,17 +27,11 @@ function loginAsPro(req, res, next) {
 }
 
 function checkUserAuthentication(req) {
-    // Placeholder function for regular user authentication logic
-    // For example, check if the user is logged in using session or token authentication
-    // Return true if authenticated, false otherwise
-    return true; // Placeholder logic, replace with actual authentication logic
+    return req.session.logged_in && req.session.userRoleId == 1; // Placeholder logic, replace with actual authentication logic
 }
 
 function checkProAuthentication(req) {
-    // Placeholder function for professional user authentication logic
-    // For example, check if the professional user is logged in using session or token authentication
-    // Return true if authenticated, false otherwise
-    return true; // Placeholder logic, replace with actual authentication logic
+    return req.session.logged_in && req.session.userRoleId == 2; // Placeholder logic, replace with actual authentication logic
 }
 
 const signup = async (event) => {
@@ -54,10 +48,10 @@ const signup = async (event) => {
             body: JSON.stringify({ name, email, password, userRoleId: type }),
             headers: { 'Content-Type': 'application/json' },
         });
-
+        console.log(response)
         if (response.ok) {
             // condition for redirecting depending on if contractor === true
-            document.location.replace('/'); /// set up redirect once dashboard or profile page is created
+            document.location.replace('/dashboard'); /// set up redirect once dashboard or profile page is created
         } else {
             alert('Failed to sign up');
         }
@@ -68,6 +62,19 @@ if (document.querySelector('.login-form')) {
     document.querySelector('.login-form').addEventListener('submit', loginAsUser);
 }
 
-if (document.querySelector('.signup-form')){
- document.querySelector('.signup-form').addEventListener('submit', signup);
+if (document.querySelector('.signup-form')) {
+    document.querySelector('.signup-form').addEventListener('submit', signup);
+}
+
+async function logout(event) {
+    event.preventDefault()
+    await fetch('api/users/logout', {
+        method: "POST"
+    })
+    document.location.replace('/')
+}
+
+if (document.querySelector('#log_out')) {
+    console.log("yo dude whats up with your guinea pig")
+    document.querySelector('#log_out').addEventListener('click', logout);
 }

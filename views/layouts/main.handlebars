@@ -10,14 +10,19 @@
         /* Add your CSS styles here */
         .button-container {
             text-align: center;
-            margin-top: 20px; /* Adjust the margin-top as needed */
+            margin-top: 20px;
+            /* Adjust the margin-top as needed */
         }
-        .hero-title, h1 {
+
+        .hero-title,
+        h1 {
             text-align: center;
         }
+
         .container {
             text-align: center;
-            margin-top: 20px; /* Adjust the margin-top as needed */
+            margin-top: 20px;
+            /* Adjust the margin-top as needed */
         }
     </style>
 </head>
@@ -31,26 +36,29 @@
     <div class="navbar">
         <a href="/">Home</a>
         <a href="login">Log In</a>
+        {{#if session.logged_in}}
+        <a href="" id="log_out">Log Out</a>
+        {{/if}}
         <a href="#carpentry">Carpentry</a>
         <a href="#electrical">Electrical</a>
         <a href="#plumbing">Plumbing</a>
         <a href="#hvac">HVAC</a>
     </div>
 
-    {{#if session.user}}
+    {{#if session.logged_in}}
     {{else}}
 
-        <h1>Sign In/Sign Up</h1>
-        <div>
-            <div class="button-container">
-                <button onclick="loginAsUser()">
-                    <a href="/userlog">Sign Up as Customer</a>
-                </button>
-                <button onclick="loginAsPro()">
-                    <a href="/prolog">Sign Up as Pro</a>
-                </button>
-            </div>
+    <h1>Sign In/Sign Up</h1>
+    <div>
+        <div class="button-container">
+            <button onclick="loginAsUser()">
+                <a href="/userlog">Sign Up as Customer</a>
+            </button>
+            <button onclick="loginAsPro()">
+                <a href="/prolog">Sign Up as Pro</a>
+            </button>
         </div>
+    </div>
     {{/if}}
 
     <!-- ChatGPT Assistance Section -->
@@ -62,7 +70,7 @@
     </div>
 
 
-{{{body}}}
+    {{{body}}}
 
 
     <script>
@@ -78,7 +86,7 @@
                         },
                         body: JSON.stringify({
                             "model": "gpt-3.5-turbo",
-                            "messages": [{role: "user", content: question}],
+                            "messages": [{ role: "user", content: question }],
                             "max_tokens": 100
                         })
                     });
@@ -92,6 +100,7 @@
                 alert("Please enter a question.");
             }
         }
+
     </script>
     <script src="/js/login.js"></script>
 
