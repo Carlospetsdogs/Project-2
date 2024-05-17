@@ -41,6 +41,10 @@ user.init(
         len: [8],
       },
     },
+    userRoleId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   },
   {
     hooks: {
