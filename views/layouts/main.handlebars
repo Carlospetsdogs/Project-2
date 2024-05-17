@@ -30,7 +30,7 @@
     <!-- Navbar -->
     <div class="navbar">
         <a href="/">Home</a>
-        <a href="/views/login.handlebars">Log In</a>
+        <a href="/login">Log In</a>
         <a href="#carpentry">Carpentry</a>
         <a href="#electrical">Electrical</a>
         <a href="#plumbing">Plumbing</a>
@@ -55,6 +55,8 @@
             <button onclick="askQuestion()">Ask a Question</button>
         </div>
     </div>
+    {{{body}}}
+
     <script>
         async function askQuestion() {
             const question = prompt("What's your question?");
@@ -84,5 +86,4 @@
         }
     </script>
 </body>
-{{{body}}}
 </html>

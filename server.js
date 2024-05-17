@@ -58,7 +58,6 @@ hbs.handlebars.registerPartial('homepage', __dirname + '/views/homepage');
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
-app.set('views', 'views');
 app.set('views', path.join(__dirname, 'views'));
 
 
