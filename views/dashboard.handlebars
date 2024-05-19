@@ -1,1 +1,105 @@
-random text 
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+
+    form {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #4CAF50;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    input[type="text"],
+    textarea,
+    select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #000407;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #606361;
+        ;
+    }
+
+    .existing-projects {
+        margin-top: 20px;
+        border-top: 1px solid #ccc;
+        padding-top: 20px;
+    }
+
+    .project-item {
+        margin-bottom: 10px;
+    }
+</style>
+</head>
+
+<body>
+
+    <h1>Welcome to Help Me Out!</h1>
+    <form action="/projects" method="post">
+        <label for="projectName">Project Name:</label><br>
+        <input type="text" id="projectName" name="projectName"><br><br>
+
+        <label for="description">Description:</label><br>
+        <textarea id="description" name="description" rows="4" cols="50"></textarea><br><br>
+
+        <label for="projectCategory">Project Category:</label><br>
+        <select id="projectCategory" name="projectCategory">
+            {{#each projectCategories}}
+            <option value="{{this.categoryId}}">{{this.categoryName}}</option>
+            {{/each}}
+        </select><br><br>
+
+        <button id="projectBtn">Create Project!</button>
+    </form>
+
+    <div class="existing-projects">
+        <h2>Existing Projects</h2>
+        {{#each userProjects}}
+        <div class="project-item">
+            <h3>{{this.projectName}}</h3>
+            <p>{{this.description}}</p>
+            <p>Category: {{this.projectCategory}}</p>
+        </div>
+        {{/each}}
+    </div>
+
+    <nav>
+
+        <a href="/dashboard/?filter=all">Show All</a>
+        <a href="/dashboard/?filter=my">My PRojects</a>
+        <a href="/dashboard/?filter=new">Find a new projects</a>
+    </nav>
+
+    {{projects}}
+
+</body>
