@@ -60,27 +60,26 @@
         margin-bottom: 10px;
     }
 </style>
-</head>
+    
 
-<body>
+<h1>Welcome to Help Me Out!</h1>
+<form action="/projects" method="post">
+    <label for="projectName">Project Name:</label><br>
+    <input type="text" id="projectName" name="projectName"><br><br>
 
-    <h1>Welcome to Help Me Out!</h1>
-    <form action="/projects" method="post">
-        <label for="projectName">Project Name:</label><br>
-        <input type="text" id="projectName" name="projectName"><br><br>
+    <label for="description">Description:</label><br>
+    <textarea id="description" name="description" rows="4" cols="50"></textarea><br><br>
 
-        <label for="description">Description:</label><br>
-        <textarea id="description" name="description" rows="4" cols="50"></textarea><br><br>
+    <label for="projectCategory">Project Category:</label><br>
+    <select id="projectCategory" name="projectCategory">
+        {{#each project_categories}}
+        <option value="{{this.categoryId}}">{{this.categoryName}}</option>
+        {{/each}}
+    </select><br><br>
 
-        <label for="projectCategory">Project Category:</label><br>
-        <select id="projectCategory" name="projectCategory">
-            {{#each projectCategories}}
-            <option value="{{this.categoryId}}">{{this.categoryName}}</option>
-            {{/each}}
-        </select><br><br>
+    <button id="projectBtn">Create Project!</button>
+</form>
 
-        <button id="projectBtn">Create Project!</button>
-    </form>
 
     <div class="existing-projects">
         <h2>Existing Projects</h2>
@@ -96,10 +95,8 @@
     <nav>
 
         <a href="/dashboard/?filter=all">Show All</a>
-        <a href="/dashboard/?filter=my">My PRojects</a>
-        <a href="/dashboard/?filter=new">Find a new projects</a>
+        <a href="/dashboard/?filter=assigned">My Projects</a>
+        <a href="/dashboard/?filter=unassgined">Assgined a new Project</a>
     </nav>
 
     {{projects}}
-
-</body>

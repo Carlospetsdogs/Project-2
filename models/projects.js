@@ -3,6 +3,7 @@ const { DataTypes, Model } = require('sequelize');
 const db = require('../config/connection');
 const UserLogin = require('./userLogin');
 
+
 class projects extends Model {};
 
 projects.init({
