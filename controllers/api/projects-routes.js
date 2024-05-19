@@ -36,7 +36,7 @@ const userMiddlewareChecker = (req, res, next) => {
 
 
 // GET by all projects, Filtered by All, Assigned to User(Pro) and Unassigned
-router.get('/', userMiddlewareChecker, async (req, res) => {
+router.get('/', userMiddlewareChecker, async (req, res) => {///api/projects/?filter=unassigned
   try {
     const filter = req.query.filter || 'all'; // Default to 'all' if 'filter' is not provided
 
