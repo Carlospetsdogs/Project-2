@@ -13,6 +13,6 @@ This project we used ChatGPT API, handlebars.js, Sequelize ORM for our database,
 Github Repo:
 https://github.com/Carlospetsdogs/Project-2 
 
-Deployed Heroku application link:
+Deployed Heroku application link here:
 https://help-me-out-ad69127acabe.herokuapp.com/
 
