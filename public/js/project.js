@@ -12,7 +12,7 @@ const addProject = async function(event){
         body: JSON.stringify({
             projectName: projectName,
             description: description,
-            categoryName: categoryName
+            projectCategory: categoryName
             
         }),
         headers: {"Content-Type": 'application/json'}

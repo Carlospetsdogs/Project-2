@@ -99,7 +99,18 @@
         <a href="/dashboard/?filter=assigned">My Projects</a>
         <a href="/dashboard/?filter=unassgined">Assgined a new Project</a>
     </nav>
-
+    {{!-- Lists all projects a user has made needs clean up --}}
     {{projects}}
+    {{#each newProjects}}
+    <ul>
+        <li>{{this.projectName}}</li>
+        <li>{{this.description}}</li>
+        <li>{{this.projectCategory}}</li>
+        
+    </ul>
+       
 
-{{!-- <script src="/js/project.js"></script> --}}
+
+    {{/each}}
+
+<script src="/js/project.js"></script> 
