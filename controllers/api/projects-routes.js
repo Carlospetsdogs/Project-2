@@ -4,36 +4,40 @@ const router = require("express").Router();
 const User = require('../../models/userProfile.js'); // Import User model
 // session checker is not reading user logged in and role id needs to be experimented with
 const userMiddlewareChecker = (req, res, next) => {
+
   // Check if the user is logged in and their role is set in the session
+  console.log(req.path, req.body, req.session)
   if (!req.session.logged_in|| !req.session.userRoleId) {
     // If the session or role is not set, redirect to the homepage or login page
-    return res.redirect('/');
+    return res.status(307).redirect('/');
   }
 
-  // Get the role from the session
-  const role = req.session.role;
+  // // Get the role from the session
+  // const role = req.session.role;
 
-  // Check the role and set the loginType accordingly
-  let loginType;
-  if (role === 1) {
-    loginType = 'user'; // User role
-  } else if (role === 2) {
-    loginType = 'pro'; // Pro role
-  } else {
-    // If the role is neither 1 nor 2, redirect to the homepage or login page
-    return res.redirect('/');
-  }
+  // // Check the role and set the loginType accordingly
+  // let loginType;
+  // if (role == 1) {
+  //   loginType = 'user'; // User role
+  // } else if (role == 2) {
+  //   loginType = 'pro'; // Pro role
+  // } else {
+  //   // If the role is neither 1 nor 2, redirect to the homepage or login page
+  //   return res.status(307).redirect('/');
+  // }
 
-  // If the user is not a regular user, redirect to the homepage or login page
-  if (loginType !== 'user') {
-    return res.redirect('/');
-  }
+  // // If the user is not a regular user, redirect to the homepage or login page
+  // if (loginType !== 'user') {
+  //   return res.status(307).redirect('/');
+  // }
 
   // If everything is fine, proceed to the next middleware or route handler
   next();
 };
 
-router.get("/check", async (req, res)=> {
+router.get("/check", userMiddlewareChecker,async (req, res)=> {
+  
+  
   const projects = await Project.findAll({})
 
   res.json(projects)
@@ -102,7 +106,7 @@ router.get('/:project_id', async (req, res) => {
 // Create a new project
 // later the auth data comes from req.session.user_id
 // removed middleWareChecker until it works
-router.post('/',  async (req, res) => {
+router.post('/', userMiddlewareChecker, async (req, res) => {
   try {
     // Extract data from request body
     //const { projectName, description, userId } = req.body;
