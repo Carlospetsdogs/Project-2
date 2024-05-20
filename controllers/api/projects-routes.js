@@ -2,10 +2,10 @@ const express = require('express');
 const Project = require('../../models/projects.js');
 const router = require("express").Router();
 const User = require('../../models/userProfile.js'); // Import User model
-
+// session checker is not reading user logged in and role id needs to be experimented with
 const userMiddlewareChecker = (req, res, next) => {
   // Check if the user is logged in and their role is set in the session
-  if (!req.session || !req.session.role) {
+  if (!req.session.logged_in|| !req.session.userRoleId) {
     // If the session or role is not set, redirect to the homepage or login page
     return res.redirect('/');
   }
@@ -34,7 +34,7 @@ const userMiddlewareChecker = (req, res, next) => {
 };
 
 router.get("/check", async (req, res)=> {
-  const projects = await Project.findAll()
+  const projects = await Project.findAll({})
 
   res.json(projects)
 })
@@ -101,7 +101,8 @@ router.get('/:project_id', async (req, res) => {
 
 // Create a new project
 // later the auth data comes from req.session.user_id
-router.post('/',userMiddlewareChecker, async (req, res) => {
+// removed middleWareChecker until it works
+router.post('/',  async (req, res) => {
   try {
     // Extract data from request body
     //const { projectName, description, userId } = req.body;

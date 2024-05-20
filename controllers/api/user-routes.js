@@ -23,6 +23,8 @@ try {
   console.log(req.body)
   const userData = await userLogin.create(req.body);
   req.session.save(() => {
+    req.session.email = userData.email;
+    req.session.name = userData.name;
     req.session.userId = userData.userId;
     req.session.userRoleId = userData.userRoleId
     req.session.logged_in = true;
@@ -44,11 +46,9 @@ router.get('/', sessionChecker,(req,res) => { // GET -> /api/users/signup -> {}
 })
 router.post('/userLogin', (req,res)=> {
   console.log("/userLogin",req.body);
-  userLogin.create({
-    email: req.body.email,
-    password: req.body.password
-  })
+ userLogin.create(req.body)
   .then(user => {
+    console.log(user.dataValues);
     req.session.user = user.dataValues; // {"userId": "sadkfasdfkjsadf"}
     res.redirect('/dashboard');
   })

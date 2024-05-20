@@ -1,5 +1,6 @@
 const router = require("express").Router()
 const UserLogin = require("../models/userLogin")
+const Project = require("../models/projects")
 
 router.get("/", async(req, res)=> {
     
@@ -21,13 +22,16 @@ router.get("/login", (req, res) =>{
     res.render("login", {session: req.session})
 })
 
-router.get("/dashboard", (req, res) =>{ ///dashboard/?filter=unassigned
+router.get("/dashboard", async (req, res) =>{ ///dashboard/?filter=unassigned
     const project_categories = [
         { categoryId: 1, categoryName: 'Carpentry' },
         { categoryId: 2, categoryName: 'Electrical' },
         { categoryId: 3, categoryName: 'Plumbing' },
         { categoryId: 4, categoryName: 'HVAC' }
       ];
+
+      const dbProjects = await Project.findAll({})
+      const newProjects = dbProjects.map(project => project.get({plain:true}))
 
     console.log(req.session)
 
@@ -65,7 +69,7 @@ router.get("/dashboard", (req, res) =>{ ///dashboard/?filter=unassigned
     /// populate projects with json...
     // filter and limit projects based on req.query params
 
-    res.render("dashboard", {session: req.session, projects: JSON.stringify(projects), project_categories: project_categories})
+    res.render("dashboard", {session: req.session, newProjects, projects: JSON.stringify(projects), project_categories: project_categories})
 })
 
 module.exports = router
