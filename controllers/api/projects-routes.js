@@ -33,6 +33,11 @@ const userMiddlewareChecker = (req, res, next) => {
   next();
 };
 
+router.get("/check", async (req, res)=> {
+  const projects = await Project.findAll()
+
+  res.json(projects)
+})
 
 
 // GET by all projects, Filtered by All, Assigned to User(Pro) and Unassigned
@@ -54,6 +59,7 @@ router.get('/', userMiddlewareChecker, async (req, res) => {///api/projects/?fil
     } else if (filter === 'all') { // Change to 'all' for clarity
       // Fetch all projects (no filtering)
       projects = await Project.findAll();
+      res.json(projects)
     } else {
       // Invalid filter value
       return res.status(400).json({ error: 'Invalid filter value' });
