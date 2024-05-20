@@ -6,7 +6,7 @@ As a user goes to our website they are presented with a login/sign up page where
 
 TECH USED 
 
-this project we used ChatGPT API, handlebars.js, Sequelize ORM for our database, include authentication for the users, protected API keys through .env files, and deployed using Heroku.   
+This project we used ChatGPT API, handlebars.js, Sequelize ORM for our database, include authentication for the users, protected API keys through .env files, and deployed using Heroku.   
 
 LINKS 
 
