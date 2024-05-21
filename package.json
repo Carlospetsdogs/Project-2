@@ -29,10 +29,10 @@
     "fetch": "^1.1.0",
     "mysql2": "^3.9.7",
     "pg": "^8.11.5",
-    "sequelize": "^6.37.3"
+    "sequelize": "^6.37.3",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
-    "morgan": "^1.10.0",
     "node-dev": "^8.0.0"
   }
 }
